@@ -1,0 +1,123 @@
+@import "tailwindcss";
+
+/*
+  Tailwind v4: design tokens are declared in CSS via @theme instead of
+  tailwind.config.js. Each --color-*, --font-*, --animate-* etc. below
+  becomes a generated utility class automatically (e.g. --color-flame
+  produces bg-flame, text-flame, border-flame...).
+*/
+@theme {
+  /* Color tokens */
+  --color-ink: #0B1220;
+  --color-ink-deep: #070B14;
+  --color-ink-light: #131C2E;
+
+  --color-parchment: #EDE3CC;
+  --color-parchment-dim: #D9CBA8;
+  --color-parchment-dark: #C7B98F;
+
+  --color-flame: #C8472B;
+  --color-flame-dark: #9A3420;
+  --color-flame-light: #E06544;
+
+  --color-gold: #D9A441;
+  --color-gold-dim: #A87E33;
+  --color-gold-bright: #F2C463;
+
+  --color-teal: #1F6F78;
+  --color-teal-dark: #154E55;
+  --color-teal-light: #3B9AA3;
+
+  /* Font tokens */
+  --font-display: "Bebas Neue", "Oswald", sans-serif;
+  --font-serif: "Crimson Pro", Georgia, serif;
+  --font-mono: "JetBrains Mono", monospace;
+
+  /* Background image tokens */
+  --background-image-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  --background-image-compass-lines: repeating-conic-gradient(from 0deg, transparent 0deg 5deg, rgba(217,164,65,0.03) 5deg 6deg);
+
+  /* Box shadow tokens */
+  --shadow-poster: 0 10px 40px -10px rgba(0,0,0,0.6), 0 0 0 1px rgba(217,164,65,0.15);
+  --shadow-poster-hover: 0 25px 60px -15px rgba(0,0,0,0.7), 0 0 0 1px rgba(217,164,65,0.35);
+
+  /* Keyframe-backed animation tokens */
+  --animate-stamp: stamp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-flicker: flicker 6s ease-in-out infinite;
+  --animate-compass-spin-slow: compassSpin 40s linear infinite;
+  --animate-drift: driftWave 8s ease-in-out infinite;
+}
+
+@keyframes stamp {
+  0% { transform: scale(2.2) rotate(-8deg); opacity: 0; }
+  60% { transform: scale(0.96) rotate(2deg); opacity: 1; }
+  100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+
+@keyframes flicker {
+  0%, 100% { opacity: 1; }
+  92% { opacity: 1; }
+  93% { opacity: 0.6; }
+  94% { opacity: 1; }
+}
+
+@keyframes compassSpin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes driftWave {
+  0%, 100% { transform: translateX(0) translateY(0); }
+  50% { transform: translateX(-12px) translateY(4px); }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-ink text-parchment font-serif antialiased;
+    background-image:
+      radial-gradient(ellipse at top, rgba(217, 164, 65, 0.06), transparent 60%),
+      radial-gradient(ellipse at bottom, rgba(31, 111, 120, 0.08), transparent 60%);
+  }
+
+  ::selection {
+    @apply bg-flame/40 text-parchment;
+  }
+
+  :focus-visible {
+    outline: 2px solid #d9a441;
+    outline-offset: 3px;
+  }
+}
+
+@layer utilities {
+  .text-stroke {
+    -webkit-text-stroke: 1.5px rgba(237, 227, 204, 0.9);
+  }
+
+  .clip-poster {
+    clip-path: polygon(2% 0%, 98% 0%, 100% 4%, 100% 96%, 98% 100%, 2% 100%, 0% 96%, 0% 4%);
+  }
+
+  .bg-grain-overlay::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image: var(--background-image-grain);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
