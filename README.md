@@ -12,7 +12,7 @@ The project focuses on **component architecture, type-safe data modeling, animat
 
 🔗 **Live Demo:** `YOUR_LIVE_DEMO_URLhttps://github.com/soumitroghosh363-source/OnePiece`
 
-🔗 **Repository:** `YOUR_GITHUB_REPOSITORY_URL`
+🔗 **Repository:** `https://one-piece-cyan.vercel.app/`
 
 ---
 
