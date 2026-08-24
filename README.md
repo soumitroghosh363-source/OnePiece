@@ -18,7 +18,7 @@ The project focuses on **component architecture, type-safe data modeling, animat
 
 ## 📸 Preview
 
-![One Piece Archive Preview](./screenshots/preview.png)
+![One Piece Archive Preview](screenshorts/preview.png)
 
 ### Character Interaction
 
